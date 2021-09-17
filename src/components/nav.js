@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const StyledNav = styled.nav`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,6 +12,7 @@ const StyledNav = styled.nav`
   box-shadow: 0 1px 6px var(--shadowColor);
   padding: 10px 20px;
   background-color: var(--white);
+  z-index: 9;
 
   .logo {
     font-size: 28px;
