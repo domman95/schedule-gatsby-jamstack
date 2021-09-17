@@ -3,22 +3,6 @@ import styled from 'styled-components';
 import App from '../components/app';
 import Layout from '../components/layout';
 
-const Background = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  transform: translateX(-100%);
-  z-index: 10;
-
-  &.active {
-    transition: 0.1;
-    transform: translateX(0);
-  }
-`;
-
 const StyledSchedule = styled.main`
   padding: 20px;
 
@@ -36,7 +20,7 @@ const StyledSchedule = styled.main`
   }
 
   @media (max-width: 1500px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: ${({ active }) => (active ? 'auto 1fr' : '1fr')};
 
     .calendar-widget {
       position: fixed;
@@ -44,6 +28,10 @@ const StyledSchedule = styled.main`
       height: calc(100vh - 110px);
       left: 0;
       transform: translateX(-100%);
+
+      &.active {
+        position: static;
+      }
 
       .widgetButton {
         position: absolute;
@@ -68,11 +56,7 @@ export default function Schedule() {
   return (
     <App>
       <Layout loggedIn>
-        <Background
-          className={`${toggleWidget && 'active'}`}
-          onClick={handleToggle}
-        />
-        <StyledSchedule>
+        <StyledSchedule active={toggleWidget}>
           <div className={`calendar-widget basic ${toggleWidget && 'active'}`}>
             <button className="widgetButton" onClick={handleToggle} />
           </div>

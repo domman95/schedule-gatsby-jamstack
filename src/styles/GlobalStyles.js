@@ -37,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    max-width: 1920px;
+    /* max-width: 1920px; */
     margin: 0 auto;
     min-height: calc(100vh - 70px);
     background-color: var(--backgroundColor);
