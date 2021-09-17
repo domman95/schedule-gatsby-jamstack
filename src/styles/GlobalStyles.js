@@ -18,7 +18,8 @@ const GlobalStyle = createGlobalStyle`
     --regular: 400;
     --semiBold: 600;
     --extraBold: 800;
-
+    --boxShadow: 6px 6px 12px var(--shadowColor);
+    --borderRadius: 6px;
   }
 
   html {
@@ -36,23 +37,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    max-width: 1920px;
+    /* max-width: 1920px; */
     margin: 0 auto;
     min-height: calc(100vh - 70px);
-    padding: 20px;
     background-color: var(--backgroundColor);
-    gap: 10px;
+    gap: 20px;
   }
 
-  .basicComponentsStyle {
+  .basic {
+    border-radius: var(--borderRadius);
+    box-shadow: var(--boxShadow);
     background-color: var(--white);
-    border-radius: 10px;
-    box-shadow: 6px 6px 12px var(--shadowColor);
-    // delete it later
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
   }
 `;
 
