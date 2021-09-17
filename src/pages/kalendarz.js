@@ -4,45 +4,62 @@ import App from '../components/app';
 import Layout from '../components/layout';
 
 const StyledSchedule = styled.main`
+  display: grid;
+  grid-template-columns: ${({ active }) => (active ? 'auto 1fr' : '1fr')};
   padding: 20px;
 
-  display: grid;
-  grid-template-columns: auto 1fr;
-
   .calendar-widget {
-    position: relative;
+    position: fixed;
+    z-index: 10;
+    height: calc(100vh - 110px);
+    left: 0;
     width: 450px;
+    transform: translateX(-100%);
     transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 
     &.active {
+      position: relative;
       transform: translateX(0);
+    }
+
+    .widgetButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 50px;
+      right: -30px;
+      width: 30px;
+      height: 70px;
+      border: none;
+      border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
+      box-shadow: 6px 6px 6px var(--shadowColor);
+      background-color: var(--white);
+      cursor: pointer;
+      --color: var(--shadowColor);
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 16px;
+        border-bottom: 2px solid var(--color);
+        box-shadow: 0 -6px 0 var(--color), 0 6px 0 var(--color);
+      }
+
+      &:hover::before {
+        --color: var(--blue);
+      }
     }
   }
 
-  @media (max-width: 1500px) {
-    grid-template-columns: ${({ active }) => (active ? 'auto 1fr' : '1fr')};
+  @media (min-width: 1500px) {
+    grid-template-columns: auto 1fr;
 
     .calendar-widget {
-      position: fixed;
-      z-index: 10;
-      height: calc(100vh - 110px);
-      left: 0;
-      transform: translateX(-100%);
-
-      &.active {
-        position: static;
-      }
-
+      position: relative;
+      transform: translateX(0);
       .widgetButton {
-        position: absolute;
-        top: 50px;
-        right: -30px;
-        width: 30px;
-        height: 70px;
-        border: none;
-        border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
-        box-shadow: 6px 6px 6px var(--shadowColor);
-        background-color: var(--white);
+        display: none;
       }
     }
   }
@@ -59,6 +76,8 @@ export default function Schedule() {
         <StyledSchedule active={toggleWidget}>
           <div className={`calendar-widget basic ${toggleWidget && 'active'}`}>
             <button className="widgetButton" onClick={handleToggle} />
+            <div className="calendar-calendar"></div>
+            <div className="calendar-customersList"></div>
           </div>
           <div className="calendar-main basic"></div>
         </StyledSchedule>
