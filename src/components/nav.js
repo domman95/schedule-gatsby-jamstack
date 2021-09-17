@@ -73,6 +73,26 @@ const StyledNav = styled.nav`
       ul {
         flex: 1;
         box-shadow: -1px 0px 0px var(--white);
+
+        li {
+          position: relative;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background-color: var(--white);
+            border-radius: 50%;
+          }
+
+          &:nth-last-child(1)::before {
+            display: none;
+          }
+        }
       }
     `}
 `;
