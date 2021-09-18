@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import App from '../components/app';
 import Layout from '../components/layout';
+import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
 
 const StyledDashboard = styled.main`
   padding: 20px;
@@ -12,12 +13,29 @@ const StyledDashboard = styled.main`
 
   .dashboard-header {
     height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    h2 {
+      padding: 0 20px;
+    }
   }
 
   .dashboard-main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
     gap: 20px;
+  }
+
+  .dashboard-visits {
+    border: 10px solid var(--white);
+    max-height: calc(100vh - 200px);
+
+    .column {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
   }
 `;
 
@@ -26,9 +44,13 @@ export default function Dashboard() {
     <App>
       <Layout loggedIn>
         <StyledDashboard>
-          <div className="dashboard-header basic"></div>
+          <div className="dashboard-header basic">
+            <h2>Cześć, user!</h2>
+          </div>
           <div className="dashboard-main">
-            <div className="dashboard-visits basic"></div>
+            <div className="dashboard-visits basic">
+              <ScheduleOneDayColumn />
+            </div>
             <div className="dashboard-customers basic"></div>
           </div>
         </StyledDashboard>
