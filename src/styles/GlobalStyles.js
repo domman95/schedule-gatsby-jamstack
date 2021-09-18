@@ -52,6 +52,11 @@ const GlobalStyle = createGlobalStyle`
     box-shadow: var(--boxShadow);
     background-color: var(--white);
   }
+
+  button {
+    cursor: pointer;
+    border: none;
+  }
 `;
 
 export default GlobalStyle;
