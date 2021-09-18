@@ -27,9 +27,12 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--backgroundColor);
   }
 
+  h1, h2, h3, h4, h5, h6, p, a {
+    color: var(--black);
+  }
+
   a {
     text-decoration: none;
-    color: var(--black);
 
     &:hover {
       text-decoration: underline;
@@ -37,13 +40,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    /* max-width: 1920px; */
     margin: 0 auto;
     min-height: calc(100vh - 70px);
     background-color: var(--backgroundColor);
     gap: 20px;
   }
 
+  // styles for every components inside app
   .basic {
     border-radius: var(--borderRadius);
     box-shadow: var(--boxShadow);
