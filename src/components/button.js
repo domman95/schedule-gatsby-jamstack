@@ -27,11 +27,12 @@ const StyledButton = styled.button`
     css`
       padding: 0;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       background-color: var(--blue);
       color: var(--white);
-      font-size: 32px;
+      font-size: 28px;
+      line-height: 42px;
     `};
 `;
 

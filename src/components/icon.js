@@ -13,6 +13,7 @@ const StyledIcon = styled.button`
   width: 28px;
   height: 28px;
   color: var(--blue);
+  background-color: transparent;
 
   svg {
     width: 100%;

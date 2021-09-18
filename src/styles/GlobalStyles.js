@@ -56,6 +56,10 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     border: none;
+
+    &:active {
+      opacity: 0.5;
+    }
   }
 `;
 
