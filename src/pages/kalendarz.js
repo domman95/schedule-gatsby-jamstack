@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import App from '../components/app';
 import Layout from '../components/layout';
+import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
 
 const StyledSchedule = styled.main`
   display: grid;
@@ -30,7 +31,7 @@ const StyledSchedule = styled.main`
       top: 50px;
       right: -30px;
       width: 30px;
-      height: 70px;
+      height: 50px;
       border: none;
       border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
       box-shadow: 6px 6px 6px var(--shadowColor);
@@ -48,6 +49,22 @@ const StyledSchedule = styled.main`
 
       &:hover::before {
         --color: var(--blue);
+      }
+    }
+  }
+
+  .calendar-main {
+    display: grid;
+    grid-template-columns: repeat(7, 600px);
+    max-height: calc(100vh - 110px);
+    border: 10px solid var(--white);
+    overflow-y: auto;
+
+    .column {
+      border-right: 1px solid #cecece;
+
+      &:nth-last-child(1) {
+        border: none;
       }
     }
   }
@@ -79,7 +96,15 @@ export default function Schedule() {
             <div className="calendar-calendar"></div>
             <div className="calendar-customersList"></div>
           </div>
-          <div className="calendar-main basic"></div>
+          <div className="calendar-main basic">
+            <ScheduleOneDayColumn />
+            <ScheduleOneDayColumn />
+            <ScheduleOneDayColumn />
+            <ScheduleOneDayColumn />
+            <ScheduleOneDayColumn />
+            <ScheduleOneDayColumn />
+            <ScheduleOneDayColumn />
+          </div>
         </StyledSchedule>
       </Layout>
     </App>
