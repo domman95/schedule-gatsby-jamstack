@@ -1,7 +1,9 @@
+import moment from 'moment';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import App from '../components/app';
 import Button from '../components/button';
+import Calendar from '../components/calendar';
 import CustomersList from '../components/customersList';
 import Icon from '../components/icon';
 import Layout from '../components/layout';
@@ -14,11 +16,12 @@ const StyledSchedule = styled.main`
 
   .schedule-widget {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto 1fr;
     position: fixed;
     z-index: 10;
     height: calc(100vh - 110px);
     left: 0;
+    gap: 20px;
     width: 450px;
     transform: translateX(-100%);
     transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -28,8 +31,21 @@ const StyledSchedule = styled.main`
       transform: translateX(0);
     }
 
+    .schedule-widget-calendar {
+      padding: 10px 0;
+      border: 10px solid var(--white);
+
+      .schedule-widget-calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0 20px;
+      }
+    }
+
     .schedule-widget-calendar,
     .schedule-widget-customers-list {
+      border-radius: var(--borderRadius);
     }
 
     .schedule-widget-button {
@@ -79,18 +95,6 @@ const StyledSchedule = styled.main`
         align-items: center;
         justify-self: flex-start;
         gap: 20px;
-
-        h2 {
-          font-weight: var(--semiBold);
-          font-size: 26px;
-          font-size: clamp(16px, 1.5vw, 26px);
-        }
-
-        .change-date-buttons {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
       }
 
       .manage-schedule-buttons {
@@ -116,6 +120,18 @@ const StyledSchedule = styled.main`
     }
   }
 
+  h2 {
+    font-weight: var(--semiBold);
+    font-size: 26px;
+    font-size: clamp(16px, 1.5vw, 26px);
+  }
+
+  .change-date-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
   @media (min-width: 1500px) {
     grid-template-columns: auto 1fr;
 
@@ -139,17 +155,31 @@ export default function Schedule() {
     <App>
       <Layout loggedIn>
         <StyledSchedule active={toggleWidget}>
-          <div className={`schedule-widget basic ${toggleWidget && 'active'}`}>
+          <div className={`schedule-widget ${toggleWidget && 'active'}`}>
             <button className="schedule-widget-button" onClick={handleToggle} />
-            <div className="schedule-widget-calendar"></div>
-            <div className="schedule-widget-customers-list">
+            <div className="schedule-widget-calendar basic">
+              <div className="schedule-widget-calendar-header">
+                <h2>{moment().format('MMMM YYYY')}</h2>
+                <div className="change-date-buttons">
+                  <Icon name="left" />
+                  <Icon name="right" />
+                </div>
+              </div>
+              <Calendar />
+            </div>
+            <div className="schedule-widget-customers-list basic">
               <CustomersList />
             </div>
           </div>
           <div className="schedule basic">
             <div className="schedule-header">
               <div className="schedule-header-date">
-                <h2>Grudzień 15 - 21, 2019</h2>
+                <h2>
+                  {moment().format('MMMM')}{' '}
+                  {moment().startOf('week').format('DD')}
+                  {' - '}
+                  {moment().endOf('week').format('DD, YYYY')}
+                </h2>
                 <div className="change-date-buttons">
                   <Icon name="left" />
                   <Icon name="right" />
