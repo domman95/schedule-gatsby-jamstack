@@ -40,7 +40,6 @@ const StyledDashboard = styled.main`
   }
 
   .dashboard-customers {
-    /* display: grid; */
     border: 10px solid var(--white);
     max-height: calc(100vh - 200px);
   }

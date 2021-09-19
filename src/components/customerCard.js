@@ -64,11 +64,13 @@ const Svg = ({ className }) => {
   );
 };
 
-export default function CustomerCard() {
+export default function CustomerCard({ firstName, lastName }) {
   return (
     <StyledCustomerCard className="basic">
       <div className="customer-title">
-        <p className="full-name">Anna Nowak</p>
+        <p className="full-name">
+          {lastName} {firstName}
+        </p>
         <p className="phone-number">+48 500 600 700</p>
       </div>
       <Svg className="svg" />

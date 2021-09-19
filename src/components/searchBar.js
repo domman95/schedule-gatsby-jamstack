@@ -42,7 +42,6 @@ const StyledInput = styled.input`
   border-radius: var(--borderRadius);
   max-height: 50px;
   width: 100%;
-  max-width: 500px;
   height: 100%;
   padding: 0 10px;
   font-size: 16px;
