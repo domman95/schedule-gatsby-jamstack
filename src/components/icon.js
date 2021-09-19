@@ -14,6 +14,7 @@ const StyledIcon = styled.button`
   height: 26px;
   color: var(--blue);
   background-color: transparent;
+  pointer-events: ${({ clickable }) => !clickable && 'none'};
 
   svg {
     width: 100%;
@@ -42,6 +43,10 @@ const whichIcon = (name) => {
   }
 };
 
-export default function Icon({ name }) {
-  return <StyledIcon>{whichIcon(name)}</StyledIcon>;
+export default function Icon({ name, clickable = true }) {
+  return (
+    <StyledIcon className="icon" clickable={clickable}>
+      {whichIcon(name)}
+    </StyledIcon>
+  );
 }

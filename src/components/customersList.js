@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import Icon from './icon';
+import { SearchInput } from './searchBar';
 
 const StyledCustomersList = styled.div`
   border-radius: var(--borderRadius);
@@ -11,23 +12,8 @@ const StyledCustomersList = styled.div`
   height: 100%;
   gap: 20px;
 
-  .searchBar {
-    border: 1px solid #cecece;
-    border-radius: var(--borderRadius);
+  .search-input {
     height: 50px;
-    padding: 0 10px;
-    font-size: 16px;
-    color: var(--black);
-    outline: none;
-
-    &:focus {
-      border: 1px solid var(--blue);
-    }
-
-    &::placeholder {
-      font-size: 14px;
-      color: #cecece;
-    }
   }
 
   .customers-list {
@@ -58,11 +44,7 @@ const StyledCustomersList = styled.div`
 export default function CustomersList() {
   return (
     <StyledCustomersList>
-      <input
-        type="text"
-        className="searchBar"
-        placeholder="Wpisz min. 3 litery..."
-      />
+      <SearchInput />
       <ul className="customers-list">
         <li className="customer">
           <Link to="/">Anna Nowak</Link>

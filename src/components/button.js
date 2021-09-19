@@ -6,6 +6,7 @@ const StyledButton = styled.button`
   text-transform: capitalize;
   border-radius: var(--borderRadius);
   font-weight: var(--regular);
+  white-space: nowrap;
 
   ${({ primary }) =>
     primary &&
@@ -43,7 +44,11 @@ export default function Button({
   rounded,
 }) {
   return (
-    <StyledButton primary={primary} secondary={secondary} rounded={rounded}>
+    <StyledButton
+      className="button"
+      primary={primary}
+      secondary={secondary}
+      rounded={rounded}>
       {rounded ? '+' : children}
     </StyledButton>
   );
