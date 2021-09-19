@@ -45,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: calc(100vh - 70px);
     background-color: var(--backgroundColor);
     gap: 20px;
+    padding: 90px 20px 20px;
   }
 
   // styles for every components inside app
@@ -57,6 +58,7 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     border: none;
+    background-color: transparent;
 
     &:active {
       opacity: 0.5;

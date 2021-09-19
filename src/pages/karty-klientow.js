@@ -7,7 +7,6 @@ import SearchBar from '../components/searchBar';
 
 const StyledCustomersCard = styled.main`
   display: grid;
-  padding: 20px;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
 

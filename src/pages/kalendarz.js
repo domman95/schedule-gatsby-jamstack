@@ -12,7 +12,6 @@ import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
 const StyledSchedule = styled.main`
   display: grid;
   grid-template-columns: ${({ active }) => (active ? 'auto 1fr' : '1fr')};
-  padding: 20px;
 
   .schedule-widget {
     display: grid;

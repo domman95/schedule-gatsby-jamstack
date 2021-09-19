@@ -1,9 +1,9 @@
 import { Link } from 'gatsby';
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 const StyledNav = styled.nav`
-  position: relative;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,7 +12,7 @@ const StyledNav = styled.nav`
   box-shadow: 0 1px 6px var(--shadowColor);
   padding: 10px 20px;
   background-color: var(--white);
-  z-index: 9;
+  z-index: 999;
 
   .logo {
     font-size: 28px;
@@ -20,6 +20,10 @@ const StyledNav = styled.nav`
     color: var(--blue);
     padding: 5px 45px 5px 25px;
     text-decoration: none;
+  }
+
+  .menu {
+    display: none;
   }
 
   .profile {
@@ -31,6 +35,7 @@ const StyledNav = styled.nav`
     border: none;
     cursor: pointer;
     transition: 0.1s linear;
+    z-index: 10;
 
     &:hover {
       opacity: 0.75;
@@ -75,7 +80,19 @@ const StyledNav = styled.nav`
         box-shadow: -1px 0px 0px var(--white);
 
         li {
+          display: flex;
+          align-items: center;
           position: relative;
+
+          a {
+            display: inline-block;
+            &.active {
+              background-color: var(--white);
+              padding: 5px 10px;
+              transform: skewX(-10deg);
+              color: var(--blue);
+            }
+          }
 
           &::before {
             content: '';
@@ -95,47 +112,123 @@ const StyledNav = styled.nav`
         }
       }
     `}
+
+  @media (max-width: 768px) {
+    .menu {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      transition: 0.1s linear;
+      transform: ${({ toggle }) => toggle && 'rotate(45deg)'};
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 60%;
+        border-bottom: 2px solid var(--black);
+        box-shadow: ${({ toggle }) =>
+          toggle ? 'none' : '0 8px 0 var(--black), 0 -8px 0 var(--black)'};
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 60%;
+        border-bottom: 2px solid var(--black);
+        transform: ${({ toggle }) => toggle && 'rotate(90deg)'};
+      }
+    }
+
+    ul {
+      position: fixed;
+      background-color: var(--white);
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 70px 20px;
+      box-shadow: -6px 0 12px var(--shadowColor);
+      transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+      transform: ${({ toggle }) =>
+        toggle ? 'translateX(0)' : 'translateX(100%)'};
+
+      li a {
+        color: var(--black);
+
+        &.active {
+          display: inline-block;
+          background-color: var(--blue);
+          padding: 5px 10px;
+          transform: skewX(-10deg);
+          color: var(--white);
+        }
+      }
+    }
+  }
 `;
 
-const LoggedIn = () => {
+const LoggedIn = ({ handleToggle }) => {
   return (
     <>
       <ul>
         <li>
-          <Link to="/panel-glowny">panel główny</Link>
+          <Link to="/panel-glowny" activeClassName="active">
+            panel główny
+          </Link>
         </li>
         <li>
-          <Link to="/kalendarz">kalendarz</Link>
+          <Link to="/kalendarz" activeClassName="active">
+            kalendarz
+          </Link>
         </li>
         <li>
-          <Link to="/karty-klientow">karty klientów</Link>
+          <Link to="/karty-klientow" activeClassName="active">
+            karty klientów
+          </Link>
         </li>
       </ul>
-      <button className="profile" />
+      <button className="profile" onClick={handleToggle} />
     </>
   );
 };
 
-const LoggedOut = () => {
+const LoggedOut = ({ handleToggle }) => {
   return (
-    <ul>
-      <li>
-        <Link to="/">Zaloguj się</Link>
-      </li>
-      <li className="signUp">
-        <Link to="/">Zarejestruj się</Link>
-      </li>
-    </ul>
+    <>
+      <ul>
+        <li>
+          <Link to="/">Zaloguj się</Link>
+        </li>
+        <li className="signUp">
+          <Link to="/">Zarejestruj się</Link>
+        </li>
+      </ul>
+      <button className="menu" onClick={handleToggle} />
+    </>
   );
 };
 
 export default function Nav({ loggedIn }) {
+  const [toggle, setToggle] = useState(false);
+
+  const handleToggle = () => setToggle(!toggle);
+
   return (
-    <StyledNav loggedin={loggedIn}>
+    <StyledNav loggedin={loggedIn} toggle={toggle}>
       <Link to="/" className="logo">
         Schedule
       </Link>
-      {loggedIn ? <LoggedIn /> : <LoggedOut />}
+      {loggedIn ? (
+        <LoggedIn handleToggle={handleToggle} />
+      ) : (
+        <LoggedOut handleToggle={handleToggle} />
+      )}
     </StyledNav>
   );
 }

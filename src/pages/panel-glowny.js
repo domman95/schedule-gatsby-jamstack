@@ -6,11 +6,10 @@ import Layout from '../components/layout';
 import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
 
 const StyledDashboard = styled.main`
-  padding: 20px;
-
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content;
+  /* grid-template-rows: max-content; */
+  width: 100%;
 
   .dashboard-header {
     height: 70px;
@@ -25,11 +24,16 @@ const StyledDashboard = styled.main`
 
   .dashboard-main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     gap: 20px;
+
+    @media (max-width: 540px) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .dashboard-visits {
+  .dashboard-visits,
+  .dashboard-customers {
     border: 10px solid var(--white);
     max-height: calc(100vh - 200px);
 
@@ -37,11 +41,6 @@ const StyledDashboard = styled.main`
       overflow-x: hidden;
       overflow-y: auto;
     }
-  }
-
-  .dashboard-customers {
-    border: 10px solid var(--white);
-    max-height: calc(100vh - 200px);
   }
 `;
 
