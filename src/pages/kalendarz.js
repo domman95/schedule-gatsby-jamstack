@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import App from '../components/app';
 import Button from '../components/button';
+import CustomersList from '../components/customersList';
 import Icon from '../components/icon';
 import Layout from '../components/layout';
 import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
@@ -12,6 +13,8 @@ const StyledSchedule = styled.main`
   padding: 20px;
 
   .schedule-widget {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     position: fixed;
     z-index: 10;
     height: calc(100vh - 110px);
@@ -23,6 +26,10 @@ const StyledSchedule = styled.main`
     &.active {
       position: relative;
       transform: translateX(0);
+    }
+
+    .schedule-widget-calendar,
+    .schedule-widget-customers-list {
     }
 
     .schedule-widget-button {
@@ -135,7 +142,9 @@ export default function Schedule() {
           <div className={`schedule-widget basic ${toggleWidget && 'active'}`}>
             <button className="schedule-widget-button" onClick={handleToggle} />
             <div className="schedule-widget-calendar"></div>
-            <div className="schedule-widget-customersList"></div>
+            <div className="schedule-widget-customers-list">
+              <CustomersList />
+            </div>
           </div>
           <div className="schedule basic">
             <div className="schedule-header">

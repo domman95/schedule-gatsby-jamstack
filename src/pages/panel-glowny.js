@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import App from '../components/app';
+import CustomersList from '../components/customersList';
 import Layout from '../components/layout';
 import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
 
@@ -37,6 +38,12 @@ const StyledDashboard = styled.main`
       overflow-y: auto;
     }
   }
+
+  .dashboard-customers {
+    /* display: grid; */
+    border: 10px solid var(--white);
+    max-height: calc(100vh - 200px);
+  }
 `;
 
 export default function Dashboard() {
@@ -51,7 +58,9 @@ export default function Dashboard() {
             <div className="dashboard-visits basic">
               <ScheduleOneDayColumn />
             </div>
-            <div className="dashboard-customers basic"></div>
+            <div className="dashboard-customers basic">
+              <CustomersList />
+            </div>
           </div>
         </StyledDashboard>
       </Layout>

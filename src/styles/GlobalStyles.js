@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     --white: #fafafa;
     --backgroundColor: #eeeeee;
     --shadowColor: rgba(0,0,0,.25);
+    --light: 300;
     --regular: 400;
     --semiBold: 600;
     --extraBold: 800;

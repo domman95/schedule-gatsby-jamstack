@@ -10,8 +10,8 @@ import {
 import { GiRoundStar as FilledStar } from 'react-icons/gi';
 
 const StyledIcon = styled.button`
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   color: var(--blue);
   background-color: transparent;
 

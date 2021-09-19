@@ -5,7 +5,6 @@ const StyledOneDayColumn = styled.div`
   display: grid;
   grid-auto-rows: 70px;
   border-radius: var(--borderRadius);
-
   height: 100%;
 
   .dashboard-visits-header {
