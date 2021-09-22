@@ -40,6 +40,7 @@ const Hour = styled.div`
   justify-items: center;
   background-color: #fafafa;
   border-bottom: 1px solid #cecece;
+  cursor: pointer;
 
   &::before {
     content: '${({ content }) => content}';
@@ -79,7 +80,7 @@ const hours = [
   '20:00',
 ];
 
-export default function ScheduleOneDayColumn() {
+export default function ScheduleOneDayColumn({ onClick }) {
   return (
     <StyledOneDayColumn className="column">
       <div className="dashboard-visits-header">
@@ -87,7 +88,13 @@ export default function ScheduleOneDayColumn() {
         <p className="name">środa</p>
       </div>
       {hours.map((time, i) => (
-        <Hour className="dashboard-visits-hour" key={i} content={time} />
+        <Hour
+          role="button"
+          className="dashboard-visits-hour"
+          key={i}
+          onClick={onClick}
+          content={time}
+        />
       ))}
     </StyledOneDayColumn>
   );

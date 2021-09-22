@@ -8,7 +8,7 @@ import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
 const StyledDashboard = styled.main`
   display: grid;
   grid-template-columns: 1fr;
-  /* grid-template-rows: max-content; */
+  grid-template-rows: max-content;
   width: 100%;
 
   .dashboard-header {
@@ -24,7 +24,7 @@ const StyledDashboard = styled.main`
 
   .dashboard-main {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     gap: 20px;
 
     @media (max-width: 540px) {

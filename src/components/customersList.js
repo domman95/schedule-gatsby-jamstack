@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import Icon from './icon';
-import { SearchInput } from './searchBar';
+import { Input } from './searchBar';
 
 const StyledCustomersList = styled.div`
   border-radius: var(--borderRadius);
@@ -12,7 +12,7 @@ const StyledCustomersList = styled.div`
   height: 100%;
   gap: 20px;
 
-  .search-input {
+  .input {
     height: 50px;
   }
 
@@ -44,7 +44,7 @@ const StyledCustomersList = styled.div`
 export default function CustomersList() {
   return (
     <StyledCustomersList>
-      <SearchInput />
+      <Input placeholder="Wpisz min. 3 litery..." />
       <ul className="customers-list">
         <li className="customer">
           <Link to="/">Anna Nowak</Link>

@@ -5,8 +5,10 @@ import App from '../components/app';
 import Button from '../components/button';
 import Calendar from '../components/calendar';
 import CustomersList from '../components/customersList';
+import { AddVisitForm } from '../components/forms';
 import Icon from '../components/icon';
 import Layout from '../components/layout';
+import Modal from '../components/modal';
 import ScheduleOneDayColumn from '../components/scheduleOneDayColumn';
 
 const StyledSchedule = styled.main`
@@ -123,6 +125,7 @@ const StyledSchedule = styled.main`
     font-weight: var(--semiBold);
     font-size: 26px;
     font-size: clamp(16px, 1.5vw, 26px);
+    text-transform: capitalize;
   }
 
   .change-date-buttons {
@@ -147,8 +150,10 @@ const StyledSchedule = styled.main`
 
 export default function Schedule() {
   const [toggleWidget, setToggleWidget] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const handleToggle = () => setToggleWidget(!toggleWidget);
+  const handleModal = () => setToggleModal(!toggleModal);
 
   return (
     <App>
@@ -185,23 +190,28 @@ export default function Schedule() {
                 </div>
               </div>
               <div className="manage-schedule-buttons">
-                <Button secondary>Pracownik</Button>
-                <Button secondary>Dzień</Button>
-                <Button rounded />
+                <Button secondary onClick={handleModal}>
+                  dodaj wizytę
+                </Button>
               </div>
             </div>
             <div className="schedule-wrapper">
-              <ScheduleOneDayColumn />
-              <ScheduleOneDayColumn />
-              <ScheduleOneDayColumn />
-              <ScheduleOneDayColumn />
-              <ScheduleOneDayColumn />
-              <ScheduleOneDayColumn />
-              <ScheduleOneDayColumn />
+              <ScheduleOneDayColumn onClick={handleModal} />
+              <ScheduleOneDayColumn onClick={handleModal} />
+              <ScheduleOneDayColumn onClick={handleModal} />
+              <ScheduleOneDayColumn onClick={handleModal} />
+              <ScheduleOneDayColumn onClick={handleModal} />
+              <ScheduleOneDayColumn onClick={handleModal} />
+              <ScheduleOneDayColumn onClick={handleModal} />
             </div>
           </div>
         </StyledSchedule>
       </Layout>
+      {toggleModal && (
+        <Modal onClick={handleModal} title="dodaj wizytę">
+          <AddVisitForm />
+        </Modal>
+      )}
     </App>
   );
 }

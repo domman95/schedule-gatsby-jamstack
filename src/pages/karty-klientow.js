@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import App from '../components/app';
 import CustomerCard from '../components/customerCard';
 import Layout from '../components/layout';
 import SearchBar from '../components/searchBar';
+import { alphabet } from '../utils/alphabet';
 
 const StyledCustomersCard = styled.main`
   display: grid;
@@ -23,6 +24,7 @@ const StyledCustomersCard = styled.main`
     border: 10px solid var(--white);
     max-height: calc(100vh - 190px);
     max-width: 1300px;
+    align-content: flex-start;
     width: 100%;
     margin: 0 auto;
     overflow-y: auto;
@@ -50,7 +52,7 @@ const StyledCustomersCard = styled.main`
   }
 `;
 
-const customers = [
+const fakeCustomers = [
   { firstName: 'Anna', lastName: 'Nowak' },
   { firstName: 'Joanna', lastName: 'Kowalska' },
   { firstName: 'Ewelina', lastName: 'Biedroń' },
@@ -63,38 +65,74 @@ const customers = [
 ];
 
 export default function CustomerCards() {
-  const sorted = customers.sort((a, b) => (a.lastName > b.lastName ? 1 : -1));
-  const alphabetically = sorted.map(({ lastName }) => lastName[0]);
-  const unique = alphabetically.filter(
-    (item, index) => alphabetically.indexOf(item) === index
-  );
+  const [customersList, setCustomersList] = useState([]);
+
+  useEffect(() => {
+    const grouped = alphabet.map((i) => {
+      const matchedCustomers = fakeCustomers.filter(
+        (customer) => customer.lastName[0] === i && customer
+      );
+      return { id: i, customers: [...matchedCustomers] };
+    });
+
+    setCustomersList(grouped);
+  }, []);
+
+  const handleChange = (e) => {
+    const matchWord = e.target.value;
+
+    const filtered = customersList.map(({ id, customers }) => {
+      const matched = customers.filter(
+        ({ firstName, lastName }) =>
+          firstName.toLowerCase().includes(matchWord.toLowerCase()) ||
+          lastName.toLowerCase().includes(matchWord.toLowerCase())
+      );
+
+      return { id, customers: matched };
+    });
+
+    if (matchWord.length >= 3) {
+      setCustomersList(filtered);
+    }
+    if (matchWord.length < 3) {
+      const grouped = alphabet.map((i) => {
+        const matchedCustomers = fakeCustomers.filter(
+          (customer) => customer.lastName[0] === i && customer
+        );
+        return { id: i, customers: [...matchedCustomers] };
+      });
+
+      setCustomersList(grouped);
+    }
+  };
 
   return (
     <App>
       <Layout loggedIn>
         <StyledCustomersCard>
           <div className="search-bar-container basic">
-            <SearchBar />
+            <SearchBar onChange={handleChange} />
           </div>
           <div className="customer-cards-container basic">
-            {unique.map((item) => (
-              <ol className="ordered-list">
-                <div className="letter">{item}</div>
-                <ul className="customer-cards-list">
-                  {customers.map(({ firstName, lastName }, i) => {
-                    if (lastName[0] === item) {
-                      return (
+            {customersList.map(({ id, customers }) => {
+              return (
+                <ul className="ordered-list" key={id}>
+                  <div className="letter">{id}</div>
+                  {customers.length > 0 ? (
+                    <ul className="customer-cards-list">
+                      {customers.map(({ firstName, lastName }) => (
                         <CustomerCard
-                          key={i}
                           firstName={firstName}
                           lastName={lastName}
                         />
-                      );
-                    }
-                  })}
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>Brak klientów</p>
+                  )}
                 </ul>
-              </ol>
-            ))}
+              );
+            })}
           </div>
         </StyledCustomersCard>
       </Layout>

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
+import { AddVisitForm } from './forms';
 import Icon from './icon';
+import Modal from './modal';
 
 const StyledCustomerCard = styled.li`
   position: relative;
@@ -65,17 +67,30 @@ const Svg = ({ className }) => {
 };
 
 export default function CustomerCard({ firstName, lastName }) {
+  const [toggleModal, setToggleModal] = useState(false);
+
+  const handleModal = () => setToggleModal(!toggleModal);
+
   return (
-    <StyledCustomerCard className="basic">
-      <div className="customer-title">
-        <p className="full-name">
-          {lastName} {firstName}
-        </p>
-        <p className="phone-number">+48 500 600 700</p>
-      </div>
-      <Svg className="svg" />
-      <Icon name="more" />
-      <Button secondary>umów wizytę</Button>
-    </StyledCustomerCard>
+    <>
+      <StyledCustomerCard className="basic">
+        <div className="customer-title">
+          <p className="full-name">
+            {lastName} {firstName}
+          </p>
+          <p className="phone-number">+48 500 600 700</p>
+        </div>
+        <Svg className="svg" />
+        <Icon name="more" />
+        <Button secondary onClick={handleModal}>
+          umów wizytę
+        </Button>
+      </StyledCustomerCard>
+      {toggleModal && (
+        <Modal title="dodaj wizytę" onClick={handleModal}>
+          <AddVisitForm />
+        </Modal>
+      )}
+    </>
   );
 }
