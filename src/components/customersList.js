@@ -8,13 +8,9 @@ const StyledCustomersList = styled.div`
   border-radius: var(--borderRadius);
   padding: 10px;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr;
   height: 100%;
   gap: 20px;
-
-  .input {
-    height: 50px;
-  }
 
   .customers-list {
     border: 1px solid #cecece;
@@ -44,7 +40,6 @@ const StyledCustomersList = styled.div`
 export default function CustomersList() {
   return (
     <StyledCustomersList>
-      <Input placeholder="Wpisz min. 3 litery..." />
       <ul className="customers-list">
         <li className="customer">
           <Link to="/">Anna Nowak</Link>
