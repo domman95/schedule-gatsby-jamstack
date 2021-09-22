@@ -22,6 +22,10 @@ const StyledSearchBar = styled.div`
     border-bottom: 1px solid var(--shadowColor);
   }
 
+  .button {
+    justify-self: flex-end;
+  }
+
   .search-bar {
     display: flex;
     height: 100%;
@@ -87,14 +91,14 @@ export default function SearchBar({ onChange }) {
   return (
     <>
       <StyledSearchBar>
-        <div className="search-bar">
+        {/* <div className="search-bar">
           <label htmlFor="search-input" className="search-label">
             <Icon name="search" clickable={false} />
           </label>
           <Input placeholder="Wpisz min. 3 litery..." onChange={onChange} />
           <Button secondary>A-Z</Button>
           <Button secondary>Z-A</Button>
-        </div>
+        </div> */}
         <Button rounded onClick={handleModal} />
       </StyledSearchBar>
       {toggleModal && (

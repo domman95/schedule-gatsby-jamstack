@@ -78,47 +78,19 @@ export default function CustomerCards() {
     setCustomersList(grouped);
   }, []);
 
-  const handleChange = (e) => {
-    const matchWord = e.target.value;
-
-    const filtered = customersList.map(({ id, customers }) => {
-      const matched = customers.filter(
-        ({ firstName, lastName }) =>
-          firstName.toLowerCase().includes(matchWord.toLowerCase()) ||
-          lastName.toLowerCase().includes(matchWord.toLowerCase())
-      );
-
-      return { id, customers: matched };
-    });
-
-    if (matchWord.length >= 3) {
-      setCustomersList(filtered);
-    }
-    if (matchWord.length < 3) {
-      const grouped = alphabet.map((i) => {
-        const matchedCustomers = fakeCustomers.filter(
-          (customer) => customer.lastName[0] === i && customer
-        );
-        return { id: i, customers: [...matchedCustomers] };
-      });
-
-      setCustomersList(grouped);
-    }
-  };
-
   return (
     <App>
       <Layout loggedIn>
         <StyledCustomersCard>
           <div className="search-bar-container basic">
-            <SearchBar onChange={handleChange} />
+            <SearchBar />
           </div>
           <div className="customer-cards-container basic">
             {customersList.map(({ id, customers }) => {
               return (
                 <ul className="ordered-list" key={id}>
                   <div className="letter">{id}</div>
-                  {customers.length > 0 ? (
+                  {customers.length > 0 && (
                     <ul className="customer-cards-list">
                       {customers.map(({ firstName, lastName }) => (
                         <CustomerCard
@@ -127,8 +99,6 @@ export default function CustomerCards() {
                         />
                       ))}
                     </ul>
-                  ) : (
-                    <p>Brak klientów</p>
                   )}
                 </ul>
               );
