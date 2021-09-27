@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
 import { AddCustomerForm } from './forms';
-import Icon from './icon';
 import Modal from './modal';
 
 const StyledSearchBar = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 20px;
 
   &::before {
@@ -20,10 +19,6 @@ const StyledSearchBar = styled.div`
     left: -20px;
     width: calc(100% + 40px);
     border-bottom: 1px solid var(--shadowColor);
-  }
-
-  .button {
-    justify-self: flex-end;
   }
 
   .search-bar {
@@ -91,14 +86,6 @@ export default function SearchBar({ onChange }) {
   return (
     <>
       <StyledSearchBar>
-        {/* <div className="search-bar">
-          <label htmlFor="search-input" className="search-label">
-            <Icon name="search" clickable={false} />
-          </label>
-          <Input placeholder="Wpisz min. 3 litery..." onChange={onChange} />
-          <Button secondary>A-Z</Button>
-          <Button secondary>Z-A</Button>
-        </div> */}
         <Button rounded onClick={handleModal} />
       </StyledSearchBar>
       {toggleModal && (
